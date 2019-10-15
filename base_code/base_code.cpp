@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     vector<vector<long long int>> image_size = {/*{1024, 768},{2048, 2048}, */ {1024, 768} /*, {4194304, 768}, {16777216, 768}*/};
     cout << "Image size"
          << "\t"
-         << "Kernel size"
+         << "K"
          << "\t"
          << "Performance"
          << "\t"
