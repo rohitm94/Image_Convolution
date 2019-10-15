@@ -80,7 +80,6 @@ int main(int argc, char *argv[])
                 }
                 cout << endl;
             }*/
-            cout << "Time taken for convolution of " << image_size[j][0] << "*" << image_size[j][1] << " by kernel size of " << kernel_size[i] << "is" << run_time << endl;
             cout << image_size[j][0] << "*" << image_size[j][1] << "\t" << ((image_size[j][0] - kernel_size[i] + 1) * (image_size[j][1] - kernel_size[i] + 1)) / (run_time) << "\t" << (1638.4 * (pow(10, 9))) / ((2 * kernel_size[i] * kernel_size[i]) - 1) << endl;
         }
     }
