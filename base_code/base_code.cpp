@@ -21,7 +21,9 @@ int main(int argc, char *argv[])
     //int n = atoi(argv[2]);
     //int m = atoi(argv[3]);
     vector<vector<long long int>> image_size = {/*{1024, 768},{2048, 2048}, */ {1024, 768} /*, {4194304, 768}, {16777216, 768}*/};
-    cout << "Kernel size"
+    cout << "Image size"
+         << "\t"
+         << "Kernel size"
          << "\t"
          << "Performance"
          << "\t"
@@ -80,7 +82,7 @@ int main(int argc, char *argv[])
                 }
                 cout << endl;
             }*/
-            cout << image_size[j][0] << "*" << image_size[j][1] << "\t" << ((image_size[j][0] - kernel_size[i] + 1) * (image_size[j][1] - kernel_size[i] + 1)) / (run_time) << "\t" << (1638.4 * (pow(10, 9))) / ((2 * kernel_size[i] * kernel_size[i]) - 1) << endl;
+            cout << image_size[j][0] << "*" << image_size[j][1] << "\t" << kernel_size[i] << "\t" << ((image_size[j][0] - kernel_size[i] + 1) * (image_size[j][1] - kernel_size[i] + 1)) / (run_time) << "\t" << (1638.4 * (pow(10, 9))) / ((2 * kernel_size[i] * kernel_size[i]) - 1) << endl;
         }
     }
     // vector<vector<int>> kernel_data(k, vector<int> (k, 1));
