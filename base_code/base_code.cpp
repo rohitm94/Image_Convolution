@@ -21,7 +21,11 @@ int main(int argc, char *argv[])
     //int n = atoi(argv[2]);
     //int m = atoi(argv[3]);
     vector<vector<long long int>> image_size = {/*{1024, 768},{2048, 2048}, */ {1024, 768} /*, {4194304, 768}, {16777216, 768}*/};
-
+    cout << "Kernel size"
+         << "\t"
+         << "Performance"
+         << "\t"
+         << "Expected" << endl;
     for (int i = 0; i < kernel_size.size(); i++)
     {
         int kernel_data[kernel_size[i]][kernel_size[i]];
@@ -77,10 +81,7 @@ int main(int argc, char *argv[])
                 cout << endl;
             }*/
             cout << "Time taken for convolution of " << image_size[j][0] << "*" << image_size[j][1] << " by kernel size of " << kernel_size[i] << "is" << run_time << endl;
-            cout << "Performance:"
-                 << "\t" << ((image_size[j][0] - kernel_size[i] + 1) * (image_size[j][1] - kernel_size[i] + 1)) / (run_time) << "\t"
-                 << "Expected:"
-                 << "\t" << (1638.4 * (pow(10, 9))) / ((2 * kernel_size[i] * kernel_size[i]) - 1) << endl;
+            cout << image_size[j][0] << "*" << image_size[j][1] << "\t" << ((image_size[j][0] - kernel_size[i] + 1) * (image_size[j][1] - kernel_size[i] + 1)) / (run_time) << "\t" << (1638.4 * (pow(10, 9))) / ((2 * kernel_size[i] * kernel_size[i]) - 1) << endl;
         }
     }
     // vector<vector<int>> kernel_data(k, vector<int> (k, 1));
