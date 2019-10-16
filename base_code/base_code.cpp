@@ -69,10 +69,10 @@ int main(int argc, char *argv[])
                 {
                     long int conv_out = 0;
 
-#pragma omp parallel for reduction(+ \
-                                   : conv_out) private(a, b)
                     for (int a = 0; a < kernel_size[i]; ++a)
                     {
+#pragma omp parallel for reduction(+ \
+                                   : conv_out)
                         for (int b = 0; b < kernel_size[i]; ++b)
                         {
                             conv_out += kernel_data[a][b] * image_data[k - int(floor(kernel_size[i] / 2)) + a][l - int(floor(kernel_size[i] / 2)) + b];
