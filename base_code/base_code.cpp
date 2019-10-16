@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
                     long int conv_out = 0;
 
 #pragma omp parallel for reduction(+ \
-                                   : conv_out)
+                                   : conv_out) private(a, b)
                     for (int a = 0; a < kernel_size[i]; ++a)
                     {
                         for (int b = 0; b < kernel_size[i]; ++b)
