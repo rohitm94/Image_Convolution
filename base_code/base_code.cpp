@@ -68,19 +68,14 @@ int main(int argc, char *argv[])
                 for (int l = floor(kernel_size[i] / 2); l < (image_size[j][1] - int(floor(kernel_size[i] / 2))); ++l)
                 {
                     long int conv_out = 0;
-#pragma omp parallel
+
+#pragma omp parallel for reduction(+ \
+                                   : conv_out)
+                    for (int a = 0; a < kernel_size[i]; ++a)
                     {
-#pragma omp for
-                        for (int a = 0; a < kernel_size[i]; ++a)
+                        for (int b = 0; b < kernel_size[i]; ++b)
                         {
-#pragma omp parallel shared(conv_out, a, k, l)
-                            {
-#pragma omp for
-                                for (int b = 0; b < kernel_size[i]; ++b)
-                                {
-                                    conv_out += kernel_data[a][b] * image_data[k - int(floor(kernel_size[i] / 2)) + a][l - int(floor(kernel_size[i] / 2)) + b];
-                                }
-                            }
+                            conv_out += kernel_data[a][b] * image_data[k - int(floor(kernel_size[i] / 2)) + a][l - int(floor(kernel_size[i] / 2)) + b];
                         }
                     }
                     new_image_data[k][l] = conv_out;
