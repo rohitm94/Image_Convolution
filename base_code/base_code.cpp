@@ -17,16 +17,19 @@ int main(int argc, char *argv[])
     chrono::duration<double> elapsed_time;
 
     int k = atoi(argv[1]);
-    int n = atoi(argv[2]);
-    int m = atoi(argv[3]);
+    long n = atoi(argv[2]);
+    long int m = atoi(argv[3]);
 
-    cout << "Image size"
-         << "\t"
-         << k
-         << "\t"
-         << "Performance"
-         << "\t"
-         << "Expected" << endl;
+    if (k = 3 && n == 1024 && m == 768)
+    {
+        cout << "Image size(n*m)"
+             << "\t"
+             << "k"
+             << "\t"
+             << "Performance"
+             << "\t"
+             << "Expected" << endl;
+    }
 
     int **kernel_data = (int **)malloc(k * sizeof(int *));
     for (int a = 0; a < k; a++)
