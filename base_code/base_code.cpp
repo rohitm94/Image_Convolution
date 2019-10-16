@@ -30,7 +30,9 @@ int main(int argc, char *argv[])
          << "Expected" << endl;
     for (int i = 0; i < kernel_size.size(); i++)
     {
-        int kernel_data[kernel_size[i]][kernel_size[i]];
+        int **kernel_data = (int **)malloc(kernel_size[i] * sizeof(int *));
+        for (int a = 0; a < kernel_size[i]; a++)
+            kernel_data[a] = (int *)malloc(kernel_size[i] * sizeof(int));
 
         for (int g = 0; g < kernel_size[i]; g++)
         {
@@ -43,8 +45,9 @@ int main(int argc, char *argv[])
         for (int j = 0; j < image_size.size(); j++)
         {
             //vector<vector<int>> image_data(image_size[j][0], vector<int>(image_size[j][1], rand() % 255));
-            int image_data[image_size[j][0]][image_size[j][1]];
-            int new_image_data[image_size[j][0]][image_size[j][1]];
+            int **image_data = (int **)malloc(image_size[j][0] * sizeof(int *));
+            for (int a = 0; a < image_size[j][0]; a++)
+                image_data[a] = (int *)malloc(image_size[j][1] * sizeof(int));
 
             for (int g = 0; g < image_size[j][0]; g++)
             {
@@ -53,7 +56,13 @@ int main(int argc, char *argv[])
                     image_data[g][h] = (rand() % 256);
                 }
             }
+
+            int **new_image_data = (int **)malloc(image_size[j][0] * sizeof(int *));
+            for (int a = 0; a < image_size[j][0]; a++)
+                new_image_data[a] = (int *)malloc(image_size[j][1] * sizeof(int));
+
             clock_start = system_clock::now();
+            //#pragma omp parallel for
             for (int k = floor(kernel_size[i] / 2); k < (image_size[j][0] - int(floor(kernel_size[i] / 2))); ++k)
             {
                 for (int l = floor(kernel_size[i] / 2); l < (image_size[j][1] - int(floor(kernel_size[i] / 2))); ++l)
@@ -70,6 +79,7 @@ int main(int argc, char *argv[])
                     new_image_data[k][l] = conv_out;
                 }
             }
+
             clock_end = system_clock::now();
 
             elapsed_time = clock_end - clock_start;
