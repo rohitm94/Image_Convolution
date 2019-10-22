@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     chrono::time_point<system_clock> clock_start, clock_end;
     chrono::duration<double> elapsed_time;
 
-    int k = atoi(argv[1]);
+    long int k = atoi(argv[1]);
     long n = atoi(argv[2]);
     long int m = atoi(argv[3]);
 
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
              << "Expected" << endl;
     }
 
+    // Kernel Data initialisation and assignment
     int **kernel_data = (int **)malloc(k * sizeof(int *));
     for (int a = 0; a < k; a++)
         kernel_data[a] = (int *)malloc(k * sizeof(int));
@@ -43,6 +44,7 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Image Data initialisation and assignment
     int **image_data = (int **)malloc(n * sizeof(int *));
     for (int a = 0; a < n; a++)
         image_data[a] = (int *)malloc(m * sizeof(int));
@@ -55,10 +57,16 @@ int main(int argc, char *argv[])
         }
     }
 
+    // Output image data holder
     int **new_image_data = (int **)malloc(n * sizeof(int *));
     for (int a = 0; a < n; a++)
         new_image_data[a] = (int *)malloc(m * sizeof(int));
 
+    //Convolution Calculation
+    /*k-kernel size
+n- image row size
+m- image column size
+*/
     clock_start = system_clock::now();
     long int conv_out = 0;
 #pragma omp parallel for reduction(+ \
