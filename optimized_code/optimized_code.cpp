@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
     long n = atoi(argv[2]);
     long int m = atoi(argv[3]);
 
-    if (k = 3 && n == 1024 && m == 768)
+    if (k == 3 && n == 1024 && m == 768)
     {
         cout << "Image size(n*m)"
              << "\t"
